@@ -54,6 +54,12 @@ function upload(f) {
             xhr.onload = function (evt) {
                 console.log('Complete.')
             }
+            xhr.upload.addEventListener("progress", function (oEvent) {
+                if (oEvent.lengthComputable) {
+                    var percentComplete = oEvent.loaded / oEvent.total * 100;
+                    console.log(percentComplete.toString() + "%");
+                }
+            }, false);
             xhr.send(form);
         }
 
